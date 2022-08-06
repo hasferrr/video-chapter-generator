@@ -1,11 +1,16 @@
 import csv
+from sys import argv
 from random import random
 
 
 def main():
 
+    # Check for command-line usage
+    if len(argv) != 2:
+        exit("Usage: python app.py file.csv ")
+
     # Open file
-    csv_file = open("test.csv")
+    csv_file = open(argv[1])
     lines = csv.reader(csv_file)
 
     # Open file xml
