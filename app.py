@@ -1,20 +1,41 @@
 import csv
 from sys import argv
 from random import random
+from os.path import isfile
 
 
 def main():
 
     # Check for command-line usage
-    if len(argv) != 2:
-        exit("Usage: python app.py file.csv ")
+    if len(argv) != 3:
+        argv_error()
+
+    if ".csv" not in argv[1]:
+        argv_error()
+
+    if ".xml" not in argv[2]:
+        argv_error()
 
     # Open file
-    csv_file = open(argv[1])
+    try:
+        csv_file = open(argv[1])
+    except FileNotFoundError:
+        print(f"File '{argv[1]}' doesn't exist")
+        return
+
     lines = csv.reader(csv_file)
 
-    # Open file xml
-    with open("output.xml", "w") as output:
+    # Check if output xml file exist or not
+    if isfile(argv[2]) == True:
+        print(f"File '{argv[2]}' is in your directory")
+        confirm = input("Do you want to overwrite it? (y/n) ")
+        if confirm != 'y':
+            print("Canceled")
+            csv_file.close()
+            return
+
+    # Write chapters to xml file
+    with open(argv[2], "w") as output:
 
         # Write header
         output.write(
@@ -56,8 +77,14 @@ def main():
 </Chapters>\n""")
 
 
-    # Close file
+    # Close file and exit
     csv_file.close()
+    print("DONE")
+    return
+
+
+def argv_error():
+    exit("Usage: python app.py file.csv output.xml")
 
 
 if __name__ == '__main__':
