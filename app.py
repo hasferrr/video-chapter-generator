@@ -8,13 +8,16 @@ def main():
 
     # Check for command-line usage
     if len(argv) != 3:
-        argv_error()
+        exit("Usage: python app.py file.csv output.xml")
 
-    if ".csv" not in argv[1]:
-        argv_error()
+    # Check for output file name
+    if argv[2] == ".xml":
+        exit("Output file name error")
 
-    if ".xml" not in argv[2]:
-        argv_error()
+    if argv[2][-4:] != ".xml":
+        output_file_name = argv[2] + ".xml"
+    else:
+        output_file_name = argv[2]
 
     # Open file
     try:
@@ -26,8 +29,8 @@ def main():
     lines = csv.reader(csv_file)
 
     # Check if output xml file exist or not
-    if isfile(argv[2]) == True:
-        print(f"File '{argv[2]}' is in your directory")
+    if isfile(output_file_name) == True:
+        print(f"File '{output_file_name}' is in your directory")
         confirm = input("Do you want to overwrite it? (y/n) ")
         if confirm != 'y':
             print("Canceled")
@@ -35,7 +38,7 @@ def main():
             return
 
     # Write chapters to xml file
-    with open(argv[2], "w") as output:
+    with open(output_file_name, "w") as output:
 
         # Write header
         output.write(
@@ -81,10 +84,6 @@ def main():
     csv_file.close()
     print("DONE")
     return
-
-
-def argv_error():
-    exit("Usage: python app.py file.csv output.xml")
 
 
 if __name__ == '__main__':
