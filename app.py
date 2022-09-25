@@ -54,7 +54,7 @@ def main():
         # Write ChapterAtom
         chapter_uid = 3000000000
         for line in lines:
-
+            print(line)
             # Opening
             output.write("    <ChapterAtom>\n")
 
