@@ -5,37 +5,73 @@ from os.path import isfile
 
 
 def main():
+    if command_line() != 0:
+        exit("Usage: python app.py file.csv output.xml")
+
+    if check_file(argv[1], argv[2]) != 0:
+        exit()
+
+    write_chapters(argv[1], argv[2])
+
+
+
+def command_line():
 
     # Check for command-line usage
     if len(argv) != 3:
-        exit("Usage: python app.py file.csv output.xml")
+        return 1
 
-    # Check for output file name
-    if argv[2] == ".xml":
-        exit("Output file name error")
+    return 0
 
-    if argv[2][-4:] != ".xml":
-        output_file_name = argv[2] + ".xml"
+
+
+def check_file(csv_file, output_file_name):
+
+
+    """ INPUT FILE NAME"""
+
+    # Check if input csv file exist or not
+    if isfile(csv_file) == True:
+        pass
+
     else:
-        output_file_name = argv[2]
+        print(f"File '{csv_file}' doesn't exist")
+        return 1
 
-    # Open file
-    try:
-        csv_file = open(argv[1])
-    except FileNotFoundError:
-        print(f"File '{argv[1]}' doesn't exist")
-        return
 
-    lines = csv.reader(csv_file)
+    """ OUTPUT FILE NAME """
 
     # Check if output xml file exist or not
     if isfile(output_file_name) == True:
+
         print(f"File '{output_file_name}' is in your directory")
+
+        # Confirm to overwrite output file?
         confirm = input("Do you want to overwrite it? (y/n) ")
-        if confirm != 'y':
+
+        if confirm == 'y':
+            pass
+
+        else:
             print("Canceled")
-            csv_file.close()
-            return
+            return 1
+
+    return 0
+
+
+# File.csv -> File.xml
+# Start writing video chapters
+def write_chapters(csv_file, output_file_name):
+
+    # Open and read file
+    open_csv_file = open(csv_file)
+    lines = csv.reader(open_csv_file)
+
+
+    # Add ".xml" to file name
+    if output_file_name[-4:] != ".xml":
+        output_file_name = output_file_name + ".xml"
+
 
     # Write chapters to xml file
     with open(output_file_name, "w") as output:
@@ -79,11 +115,11 @@ def main():
 """  </EditionEntry>
 </Chapters>\n""")
 
-
-    # Close file and exit
-    csv_file.close()
+    # Exit
+    open_csv_file.close()
     print("DONE")
     return
+
 
 
 if __name__ == '__main__':
