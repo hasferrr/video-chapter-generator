@@ -4,7 +4,13 @@
 
 ![chapters](example/chapter-file.jpg)
 
-## Deskripsi aplikasi
+## Usage
+
+```bash
+python app.py file.csv output.xml
+```
+
+## Deskripsi
 
 ### Input
 
