@@ -6,7 +6,7 @@ from os.path import isfile
 
 def main():
     if command_line() != 0:
-        exit("Usage: python app.py file.csv output.xml")
+        exit()
 
     if check_file(argv[1], argv[2]) != 0:
         exit()
@@ -19,6 +19,7 @@ def command_line():
 
     # Check for command-line usage
     if len(argv) != 3:
+        print("Usage: python app.py file.csv output.xml")
         return 1
 
     return 0
@@ -28,7 +29,7 @@ def command_line():
 def check_file(csv_file, output_file_name):
 
 
-    """ INPUT FILE NAME"""
+    """ CHECK INPUT FILE NAME"""
 
     # Check if input csv file exist or not
     if isfile(csv_file) == True:
@@ -39,7 +40,7 @@ def check_file(csv_file, output_file_name):
         return 1
 
 
-    """ OUTPUT FILE NAME """
+    """ CHECK OUTPUT FILE NAME """
 
     # Check if output xml file exist or not
     if isfile(output_file_name) == True:
