@@ -1,12 +1,14 @@
 # video-chapter-generator
 
-aplikasi ini akan consume/menggunakan **input.csv** dan produce/menghasilkan chapter file untuk video MKV yaitu **output.xml**
+(Python Sripting) aplikasi ini akan consume/menggunakan **input.csv** dan produce/menghasilkan chapter file untuk video MKV yaitu **output.xml**
+
+![chapters](example/chapter-file.jpg)
 
 ## Deskripsi aplikasi
 
 ### Input
 
-isi dari file input harus persis berbentuk seperti pada file [test.csv](example/test.csv)
+isi dari file input harus persis berbentuk seperti pada file [test.csv](example/test.csv) dan pastikan sudah diurutkan berdasarkan waktu!
 
 ```c
 00:00:00,Introduction
@@ -70,4 +72,4 @@ output file kira-kira akan seperti [test-output.xml](example/test-output.xml)
 
 output berupa file **output.xml** yang dapat di-embed/di-merge/dimasukkan ke dalam file video berformat **MKV**
 
-merge **output.xml** dapat dilakukan dengan software MKVToolNix
+merge **output.xml** dapat dilakukan dengan software [MKVToolNix](https://mkvtoolnix.download/)
