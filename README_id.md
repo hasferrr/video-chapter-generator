@@ -1,6 +1,6 @@
 # video-chapter-generator
 
-(Python Scripting) This script consumes **input.csv** file and produces a video chapter file for the MKV format video that is **output.xml**
+(Python Scripting) aplikasi ini akan consume/menggunakan **input.csv** dan produce/menghasilkan chapter file untuk video MKV yaitu **output.xml**
 
 ![chapters](example/chapter-file.jpg)
 
@@ -14,7 +14,7 @@ python app.py file.csv output.xml
 
 ### Input
 
-The contents of the input file must be exactly as in the file [test.csv](example/test.csv) (1st column: timestamp, 2nd column: chapters name), and make sure it has been sorted by timestamp!
+isi dari file input harus persis berbentuk seperti pada file [test.csv](example/test.csv) dan pastikan sudah diurutkan berdasarkan waktu!
 
 ```c
 00:00:00,Introduction
@@ -36,11 +36,11 @@ The contents of the input file must be exactly as in the file [test.csv](example
 
 ### Proses
 
-**input.csv** file will be processed or formatted into an **output.xml** file for the chapter file.
+**input.csv** akan diproses/di-format menjadi **output.xml** untuk chapter file yang bisa digunakan pada video.mkv
 
 ### Output
 
-Example output file: [test-output.xml](example/test-output.xml)
+output file kira-kira akan seperti [test-output.xml](example/test-output.xml)
 
 ```xml
 <?xml version="1.0"?>
@@ -76,4 +76,6 @@ Example output file: [test-output.xml](example/test-output.xml)
 
 ### MKV
 
-The output is in the form of an **output.xml** file that can be embedded/merged into an **MKV** format video file ([MKVToolNix](https://mkvtoolnix.download/)).
+output berupa file **output.xml** yang dapat di-embed/di-merge/dimasukkan ke dalam file video berformat **MKV**
+
+merge **output.xml** dapat dilakukan dengan software [MKVToolNix](https://mkvtoolnix.download/)
