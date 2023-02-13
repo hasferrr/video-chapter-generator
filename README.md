@@ -34,7 +34,7 @@ The contents of the input file must be exactly as in the file [test.csv](example
 02:50:03,Conclusion
 ```
 
-### Proses
+### Process
 
 **input.csv** file will be processed or formatted into an **output.xml** file for the chapter file.
 
@@ -58,9 +58,9 @@ Example output file: [test-output.xml](example/test-output.xml)
         <ChapLanguageIETF>und</ChapLanguageIETF>
       </ChapterDisplay>
     </ChapterAtom>
-    .
-    .
-    .
+
+    ...
+
     <ChapterAtom>
       <ChapterUID>3000000015</ChapterUID>
       <ChapterTimeStart>02:50:03.000000000</ChapterTimeStart>
