@@ -52,10 +52,7 @@ def check_file(csv_file_name, output_file_name):
         # Confirm to overwrite output file?
         confirm = input("Do you want to overwrite it? (y/n) ")
 
-        if confirm == 'y':
-            pass
-
-        else:
+        if confirm != 'y':
             print("Canceled")
             return 1
 
@@ -72,6 +69,8 @@ def load_file(csv_file):
     # Store it into list
     for line in lines:
         timestamp_title.append(tuple(line))
+
+    timestamp_title = sorted(timestamp_title, key=lambda data: data[0])
 
     return timestamp_title
 
