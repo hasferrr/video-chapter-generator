@@ -5,14 +5,23 @@ from os.path import isfile
 
 
 def main():
+
+    csv_file_name = argv[1]
+    output_file_name = argv[2]
+
+    # Add ".xml" to file name
+    if output_file_name[-4:] != ".xml":
+        output_file_name = output_file_name + ".xml"
+
     if command_line() != 0:
         exit()
 
-    if check_file(argv[1], argv[2]) != 0:
+    if check_file(csv_file_name, output_file_name) != 0:
         exit()
 
-    write_chapters(argv[1], argv[2])
+    TIMESTAMP_TITLE = load_file(csv_file_name)
 
+    write_chapters(TIMESTAMP_TITLE, output_file_name)
 
 
 def command_line():
@@ -25,25 +34,18 @@ def command_line():
     return 0
 
 
-
-def check_file(csv_file, output_file_name):
-
-
+def check_file(csv_file_name, output_file_name):
     """ CHECK INPUT FILE NAME"""
 
     # Check if input csv file exist or not
-    if isfile(csv_file) == True:
-        pass
-
-    else:
-        print(f"File '{csv_file}' doesn't exist")
+    if not (isfile(csv_file_name)):
+        print(f"File '{csv_file_name}' doesn't exist")
         return 1
-
 
     """ CHECK OUTPUT FILE NAME """
 
     # Check if output xml file exist or not
-    if isfile(output_file_name) == True:
+    if isfile(output_file_name):
 
         print(f"File '{output_file_name}' is in your directory")
 
@@ -60,26 +62,30 @@ def check_file(csv_file, output_file_name):
     return 0
 
 
-# File.csv -> File.xml
-# Start writing video chapters
-def write_chapters(csv_file, output_file_name):
+def load_file(csv_file):
+    timestamp_title = []
 
     # Open and read file
     open_csv_file = open(csv_file)
     lines = csv.reader(open_csv_file)
 
+    # Store it into list
+    for line in lines:
+        timestamp_title.append(tuple(line))
 
-    # Add ".xml" to file name
-    if output_file_name[-4:] != ".xml":
-        output_file_name = output_file_name + ".xml"
+    return timestamp_title
 
+
+# File.csv -> File.xml
+# Start writing video chapters
+def write_chapters(timestamp_title, output_file_name):
 
     # Write chapters to xml file
     with open(output_file_name, "w") as output:
 
         # Write header
         output.write(
-"""<?xml version="1.0"?>
+            """<?xml version="1.0"?>
 <!-- <!DOCTYPE Chapters SYSTEM "matroskachapters.dtd"> -->
 <Chapters>
   <EditionEntry>
@@ -90,7 +96,8 @@ def write_chapters(csv_file, output_file_name):
 
         # Write ChapterAtom
         chapter_uid = 3000000000
-        for line in lines:
+
+        for line in timestamp_title:
             print(line)
             # Opening
             output.write("    <ChapterAtom>\n")
@@ -98,13 +105,14 @@ def write_chapters(csv_file, output_file_name):
             # ChapterUID and ChapterTimeStart
             chapter_uid += 1
             output.write(f"      <ChapterUID>{chapter_uid}</ChapterUID>\n")
-            output.write(f"      <ChapterTimeStart>{line[0]}.000000000</ChapterTimeStart>\n")
+            output.write(
+                f"      <ChapterTimeStart>{line[0]}.000000000</ChapterTimeStart>\n")
 
             # ChapterDisplay
             output.write("      <ChapterDisplay>\n")
             output.write(f"        <ChapterString>{line[1]}</ChapterString>\n")
             output.write(
-"""        <ChapterLanguage>und</ChapterLanguage>
+                """        <ChapterLanguage>und</ChapterLanguage>
         <ChapLanguageIETF>und</ChapLanguageIETF>
       </ChapterDisplay>\n""")
 
@@ -113,14 +121,12 @@ def write_chapters(csv_file, output_file_name):
 
         # Write footer
         output.write(
-"""  </EditionEntry>
+            """  </EditionEntry>
 </Chapters>\n""")
 
     # Exit
-    open_csv_file.close()
     print("DONE")
     return
-
 
 
 if __name__ == '__main__':

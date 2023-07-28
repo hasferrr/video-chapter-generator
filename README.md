@@ -1,6 +1,6 @@
-# video-chapter-generator
+# Video Chapter Generator
 
-(Python Scripting) This script consumes **input.csv** file and produces a video chapter file for the MKV format video that is **output.xml**
+(Python Script) This script consumes **input.csv** file and produces a video chapter file for the MKV format video **output.xml**
 
 ![chapters](example/chapter-file.jpg)
 
@@ -14,7 +14,12 @@ python app.py file.csv output.xml
 
 ### Input
 
-The contents of the input file must be exactly as in the file [test.csv](example/test.csv) (1st column: timestamp, 2nd column: chapters name), and make sure it has been sorted by timestamp!
+The contents of the input file must be exactly as in the file [test.csv](example/test.csv)
+
+- 1st column: timestamp
+- 2nd column: chapters name
+
+and make sure it has been sorted by timestamp!
 
 ```c
 00:00:00,Introduction
