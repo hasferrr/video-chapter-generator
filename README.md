@@ -81,4 +81,9 @@ Example output file: [test-output.xml](example/test-output.xml)
 
 ### MKV
 
-The output is in the form of an **output.xml** file that can be embedded/merged into an **MKV** format video file ([MKVToolNix](https://mkvtoolnix.download/)).
+The output is in the form of an **output.xml** file that can be embedded/merged into an **MKV** format video file.
+
+See :
+
+- [MKVToolNix GUI](https://mkvtoolnix.download/)
+- [mkvmerge documentation](https://mkvtoolnix.download/doc/mkvmerge.html)
