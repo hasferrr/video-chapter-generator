@@ -19,8 +19,6 @@ The contents of the input file must be exactly as in the file [test.csv](example
 - 1st column: timestamp
 - 2nd column: chapters name
 
-and make sure it has been sorted by timestamp!
-
 ```c
 00:00:00,Introduction
 00:00:24,Object-Oriented Programming
