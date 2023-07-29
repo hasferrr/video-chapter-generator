@@ -19,9 +19,10 @@ def main():
     if check_file(csv_file_name, output_file_name) != 0:
         exit()
 
-    TIMESTAMP_TITLE = load_file(csv_file_name)
+    timestamp_title = load_file(csv_file_name)
+    timestamp_title = remove_illegal_xml_chars(timestamp_title)
 
-    write_chapters(TIMESTAMP_TITLE, output_file_name)
+    write_chapters(timestamp_title, output_file_name)
 
 
 def command_line():
@@ -73,6 +74,26 @@ def load_file(csv_file):
     timestamp_title = sorted(timestamp_title, key=lambda data: data[0])
 
     return timestamp_title
+
+
+def remove_illegal_xml_chars(timestamp_title):
+    entity_ref = {
+        "<": "&lt;",
+        ">": "&gt;",
+        "&": "&amp;",
+        "'": "&apos;",
+        "\"": "&quot;"
+    }
+
+    def replace_invalid(text):
+        for key in entity_ref.keys():
+            text = text.replace(key, entity_ref[key])
+        return text
+
+    new_timestamp_title = list(
+        map(lambda e: (e[0], replace_invalid(e[1])), timestamp_title))
+
+    return new_timestamp_title
 
 
 # File.csv -> File.xml
