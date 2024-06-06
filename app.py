@@ -5,6 +5,8 @@ from os.path import isfile
 
 
 def main():
+    if command_line() != 0:
+        return
 
     csv_file_name = argv[1]
     output_file_name = argv[2]
@@ -13,11 +15,8 @@ def main():
     if output_file_name[-4:] != ".xml":
         output_file_name = output_file_name + ".xml"
 
-    if command_line() != 0:
-        exit()
-
     if check_file(csv_file_name, output_file_name) != 0:
-        exit()
+        return
 
     timestamp_title = load_file(csv_file_name)
     timestamp_title = remove_illegal_xml_chars(timestamp_title)
