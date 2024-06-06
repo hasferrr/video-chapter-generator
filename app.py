@@ -104,15 +104,14 @@ def write_chapters(timestamp_title, output_file_name):
     with open(output_file_name, "w") as output:
 
         # Write header
-        output.write(
-            """<?xml version="1.0"?>
-<!-- <!DOCTYPE Chapters SYSTEM "matroskachapters.dtd"> -->
-<Chapters>
-  <EditionEntry>
-    <EditionFlagDefault>1</EditionFlagDefault>
-    <EditionUID>""")
+        output.write('<?xml version="1.0"?>')
+        output.write('<!-- <!DOCTYPE Chapters SYSTEM "matroskachapters.dtd"> -->')
+        output.write('<Chapters>')
+        output.write('  <EditionEntry>')
+        output.write('    <EditionFlagDefault>1</EditionFlagDefault>')
+        output.write('    <EditionUID>')
         output.write(str(int(random()*10**18)))
-        output.write("</EditionUID>\n")
+        output.write('</EditionUID>\n')
 
         # Write ChapterAtom
         chapter_uid = 3000000000
@@ -120,29 +119,26 @@ def write_chapters(timestamp_title, output_file_name):
         for line in timestamp_title:
             print(line)
             # Opening
-            output.write("    <ChapterAtom>\n")
+            output.write('    <ChapterAtom>\n')
 
             # ChapterUID and ChapterTimeStart
             chapter_uid += 1
-            output.write(f"      <ChapterUID>{chapter_uid}</ChapterUID>\n")
-            output.write(
-                f"      <ChapterTimeStart>{line[0]}.000000000</ChapterTimeStart>\n")
+            output.write(f'      <ChapterUID>{chapter_uid}</ChapterUID>\n')
+            output.write(f'      <ChapterTimeStart>{line[0]}.000000000</ChapterTimeStart>\n')
 
             # ChapterDisplay
-            output.write("      <ChapterDisplay>\n")
-            output.write(f"        <ChapterString>{line[1]}</ChapterString>\n")
-            output.write(
-                """        <ChapterLanguage>und</ChapterLanguage>
-        <ChapLanguageIETF>und</ChapLanguageIETF>
-      </ChapterDisplay>\n""")
+            output.write('      <ChapterDisplay>\n')
+            output.write(f'        <ChapterString>{line[1]}</ChapterString>\n')
+            output.write('        <ChapterLanguage>und</ChapterLanguage>')
+            output.write('        <ChapLanguageIETF>und</ChapLanguageIETF>')
+            output.write('      </ChapterDisplay>\n')
 
             # Ending
-            output.write("    </ChapterAtom>\n")
+            output.write('    </ChapterAtom>\n')
 
         # Write footer
-        output.write(
-            """  </EditionEntry>
-</Chapters>\n""")
+        output.write('  </EditionEntry>')
+        output.write('</Chapters>\n')
 
     # Exit
     print("DONE")
